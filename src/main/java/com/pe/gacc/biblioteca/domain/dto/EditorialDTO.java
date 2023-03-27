@@ -10,6 +10,7 @@ import java.io.Serializable;
 @ToString
 @Getter
 @Setter
+@Builder
 public class EditorialDTO implements Serializable {
 
     private Long id;

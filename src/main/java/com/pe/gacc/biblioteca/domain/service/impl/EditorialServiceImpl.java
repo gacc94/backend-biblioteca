@@ -1,18 +1,23 @@
 package com.pe.gacc.biblioteca.domain.service.impl;
 
+import com.pe.gacc.biblioteca.domain.dto.AuthorDTO;
 import com.pe.gacc.biblioteca.domain.dto.EditorialDTO;
 import com.pe.gacc.biblioteca.domain.dto.request.EditorialDTORequest;
 import com.pe.gacc.biblioteca.domain.service.IEditorialService;
+import com.pe.gacc.biblioteca.entity.Author;
 import com.pe.gacc.biblioteca.entity.Editorial;
 import com.pe.gacc.biblioteca.persistence.repository.EditorialRepository;
 import com.pe.gacc.biblioteca.util.constant.BibliotecaConstant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EditorialServiceImpl implements IEditorialService {
@@ -70,5 +75,19 @@ public class EditorialServiceImpl implements IEditorialService {
             editorialDTOs.add(editorialDto);
         });
         return editorialDTOs;
+    }
+
+    @Override
+    public Page<EditorialDTO> findByNameLike(String name, Pageable pageable) {
+        Page<Editorial> editorialPages = editorialRepository.findByNameLikeAndState("%"+name+"%", BibliotecaConstant.STATE_ACTIVE,pageable);
+        return editorialPages
+                .map(this::convertBeanToDTO);
+    }
+
+    private EditorialDTO convertBeanToDTO(Editorial editorial){
+        return EditorialDTO.builder()
+                .id(editorial.getId())
+                .name(editorial.getName())
+                .build();
     }
 }

@@ -12,8 +12,19 @@ public final class BibliotecaConstant {
     public static final String RESOURCE_GENERIC = API_VERSION + "/api-biblitoteca";
     public static final String RESOURCE_EDITORIALS = "/editorials";
     public static final String RESOURCE_AUTHORS= "/authors";
+    public static final String RESOURCE_AUTHORS_AUTHOR= "/author";
     public static final String RESOURCE_EDITORIALS_EDITORIAL = "/editorial";
     public static final String RESOURCE_GENERIC_ID= "/{id}";
+    public static final String RESOURCE_LIBRARIES = "/libraries";
+    public static final String RESOURCE_LIBRARIES_LIBRARY = "/library";
+    public static final String RESOURCE_AREAS = "/areas";
+    public static final String RESOURCE_AREAS_AREA = "/area";
+    public static final String RESOURCE_SUBAREAS = "/sub-areas";
+    public static final String RESOURCE_SUBAREAS_SUBAREA = "/sub-area";
+    public static final String RESOURCE_ZONES = "/zones";
+    public static final String RESOURCE_ZONES_ZONE = "/zone";
+    public static final String RESOURCE_BOOKS = "/books";
+    public static final String RESOURCE_BOOKS_BOOK = "/book";
 
     public static final String CLIENT_FRONTED = "*";
 

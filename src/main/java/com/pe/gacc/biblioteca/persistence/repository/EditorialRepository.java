@@ -3,6 +3,8 @@ package com.pe.gacc.biblioteca.persistence.repository;
 import com.pe.gacc.biblioteca.entity.Editorial;
 import com.pe.gacc.biblioteca.persistence.dao.EditorialDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,5 +30,9 @@ public class EditorialRepository {
 
     public List<Editorial> findAll() {
         return editorialDao.findAll();
+    }
+
+    public Page<Editorial> findByNameLikeAndState(String name, String state, Pageable pageable){
+        return editorialDao.findByNameLikeAndState(name,state,pageable);
     }
 }

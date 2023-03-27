@@ -1,13 +1,20 @@
 package com.pe.gacc.biblioteca.controller;
 
+import com.pe.gacc.biblioteca.domain.dto.EditorialDTO;
+import com.pe.gacc.biblioteca.domain.dto.PageableDTO;
 import com.pe.gacc.biblioteca.domain.dto.request.EditorialDTORequest;
 import com.pe.gacc.biblioteca.domain.service.IEditorialService;
 import com.pe.gacc.biblioteca.util.constant.BibliotecaConstant;
+import com.pe.gacc.biblioteca.util.constant.BibliotecaUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @CrossOrigin(BibliotecaConstant.CLIENT_FRONTED)
 @RequestMapping(BibliotecaConstant.RESOURCE_GENERIC+BibliotecaConstant.RESOURCE_EDITORIALS)
@@ -15,6 +22,7 @@ public class EditorialController {
 
     @Autowired
     private IEditorialService editorialService;
+    private BibliotecaUtil bibliotecaUtil;
 
     @GetMapping
     public ResponseEntity<?> findAll(){
@@ -49,4 +57,9 @@ public class EditorialController {
                 .body(editorialService.update(editorialDTORequest, id));
     }
 
+    @GetMapping(BibliotecaConstant.RESOURCE_EDITORIALS_EDITORIAL)
+    public Page<EditorialDTO> findByName(@RequestParam String name, Pageable pageable){
+        log.info("gacc EditorialController -> { }" + pageable);
+        return editorialService.findByNameLike(name,pageable );
+    }
 }
