@@ -6,6 +6,7 @@ import com.pe.gacc.biblioteca.domain.dto.request.EditorialDTORequest;
 import com.pe.gacc.biblioteca.domain.service.IEditorialService;
 import com.pe.gacc.biblioteca.entity.Author;
 import com.pe.gacc.biblioteca.entity.Editorial;
+import com.pe.gacc.biblioteca.exception.validator.EntityNotFoundException;
 import com.pe.gacc.biblioteca.persistence.repository.EditorialRepository;
 import com.pe.gacc.biblioteca.util.constant.BibliotecaConstant;
 import com.pe.gacc.biblioteca.util.mapper.EditorialMapper;
@@ -25,6 +26,7 @@ public class EditorialServiceImpl implements IEditorialService {
 
     @Autowired
     private EditorialRepository editorialRepository;
+
     @Autowired
     private EditorialMapper editorialMapper;
 
@@ -56,15 +58,9 @@ public class EditorialServiceImpl implements IEditorialService {
 
     @Override
     public EditorialDTO findById(Long id) {
-        Optional<Editorial> editorial = editorialRepository.findById(id);
-        if (editorial.isPresent()){
-            EditorialDTO editorialDto = new EditorialDTO();
-            editorialDto.setId(editorial.get().getId());
-            editorialDto.setName(editorial.get().getName());
-            return editorialDto;
-        } else  {
-            throw new NotFoundException("Product not found with id " + id);
-        }
+        Editorial editorial = this.editorialRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("La editorial con id %s no existe", id.toString())));
+        return editorialMapper.toDTO(editorial);
     }
 
     @Override

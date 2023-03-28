@@ -1,4 +1,4 @@
-package com.pe.gacc.biblioteca.util.validator;
+package com.pe.gacc.biblioteca.exception.validator;
 
 import lombok.Getter;
 import lombok.Setter;

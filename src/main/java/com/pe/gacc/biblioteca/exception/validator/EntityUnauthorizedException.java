@@ -1,4 +1,4 @@
-package com.pe.gacc.biblioteca.util.validator;
+package com.pe.gacc.biblioteca.exception.validator;
 
 public class EntityUnauthorizedException extends RuntimeException{
 
