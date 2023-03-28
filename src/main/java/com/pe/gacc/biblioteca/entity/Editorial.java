@@ -1,11 +1,12 @@
 package com.pe.gacc.biblioteca.entity;
 
+import com.pe.gacc.biblioteca.util.constant.BibliotecaConstant;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "t_editorial", schema = "dbo")
+@Table(name = BibliotecaConstant.TAB_NAME_EDITORIAL, schema = BibliotecaConstant.SCHEMA_NAME_DBO)
 @Getter
 @Setter
 @AllArgsConstructor

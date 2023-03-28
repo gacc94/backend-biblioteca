@@ -22,6 +22,7 @@ public class EditorialController {
 
     @Autowired
     private IEditorialService editorialService;
+    @Autowired
     private BibliotecaUtil bibliotecaUtil;
 
     @GetMapping
@@ -58,8 +59,9 @@ public class EditorialController {
     }
 
     @GetMapping(BibliotecaConstant.RESOURCE_EDITORIALS_EDITORIAL)
-    public Page<EditorialDTO> findByName(@RequestParam String name, Pageable pageable){
-        log.info("gacc EditorialController -> { }" + pageable);
-        return editorialService.findByNameLike(name,pageable );
+    public Page<EditorialDTO> findByName(@RequestParam String name, PageableDTO pageable){
+        log.info("gacc EditorialController -> {}" + pageable.toString());
+        return editorialService.findByNameLike(name, bibliotecaUtil.getPageable(pageable));
     }
+
 }

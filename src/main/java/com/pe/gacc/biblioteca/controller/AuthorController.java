@@ -5,6 +5,8 @@ import com.pe.gacc.biblioteca.domain.dto.request.AuthorDTORequest;
 import com.pe.gacc.biblioteca.domain.service.IAuthorService;
 import com.pe.gacc.biblioteca.util.constant.BibliotecaConstant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,12 +20,14 @@ public class AuthorController {
     private IAuthorService authorService;
 
     @GetMapping
-    public List<AuthorDTO> findAll(@RequestParam String key_word){
-        return authorService.findByKeyWordSQL(key_word);
+    public ResponseEntity<List<AuthorDTO>> findAll(@RequestParam String key_word){
+        return new ResponseEntity<List<AuthorDTO>>
+                (authorService.findByKeyWordSQL(key_word), HttpStatus.OK);
     }
 
     @PostMapping
-    public AuthorDTO saveSQL(@RequestBody AuthorDTORequest authorDTORequest){
-        return authorService.saveSQL(authorDTORequest);
+    public ResponseEntity<AuthorDTO> saveSQL(@RequestBody AuthorDTORequest authorDTORequest){
+        return new ResponseEntity<AuthorDTO>
+                (authorService.saveSQL(authorDTORequest),HttpStatus.CREATED);
     }
 }

@@ -5,7 +5,8 @@ import com.pe.gacc.biblioteca.entity.Editorial;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 
-@Mapper(builder = @Builder(disableBuilder = true))
+@Mapper(componentModel = "spring")
 public interface EditorialMapper {
-    public EditorialDTO toDTO(Editorial editorial);
+
+    EditorialDTO toDTO(Editorial editorial);
 }

@@ -6,6 +6,7 @@ import com.pe.gacc.biblioteca.domain.service.IAuthorService;
 import com.pe.gacc.biblioteca.entity.Author;
 import com.pe.gacc.biblioteca.persistence.repository.AuthorRepository;
 import com.pe.gacc.biblioteca.util.constant.BibliotecaConstant;
+import com.pe.gacc.biblioteca.util.mapper.AuthorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +18,15 @@ public class AuthorServiceImpl implements IAuthorService {
 
     @Autowired
     private AuthorRepository authorRepository;
+    @Autowired
+    private AuthorMapper authorMapper;
 
     @Override
     public List<AuthorDTO> findByKeyWordSQL(String key_word) {
         List<Author> list = authorRepository.findByKeyWordSQL(key_word, BibliotecaConstant.STATE_ACTIVE);
 
         return list.stream()
-                .map(this::convertBeanToDTO)
+                .map((bean)-> authorMapper.toDTO(bean))
                 .collect(Collectors.toList());
     }
 

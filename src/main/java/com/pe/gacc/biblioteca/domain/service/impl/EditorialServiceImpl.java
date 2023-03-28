@@ -8,6 +8,7 @@ import com.pe.gacc.biblioteca.entity.Author;
 import com.pe.gacc.biblioteca.entity.Editorial;
 import com.pe.gacc.biblioteca.persistence.repository.EditorialRepository;
 import com.pe.gacc.biblioteca.util.constant.BibliotecaConstant;
+import com.pe.gacc.biblioteca.util.mapper.EditorialMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,8 @@ public class EditorialServiceImpl implements IEditorialService {
 
     @Autowired
     private EditorialRepository editorialRepository;
+    @Autowired
+    private EditorialMapper editorialMapper;
 
     @Override
     public EditorialDTO save(EditorialDTORequest editorialDTORequest) {
@@ -81,7 +84,7 @@ public class EditorialServiceImpl implements IEditorialService {
     public Page<EditorialDTO> findByNameLike(String name, Pageable pageable) {
         Page<Editorial> editorialPages = editorialRepository.findByNameLikeAndState("%"+name+"%", BibliotecaConstant.STATE_ACTIVE,pageable);
         return editorialPages
-                .map(this::convertBeanToDTO);
+                .map((bean) -> editorialMapper.toDTO(bean));
     }
 
     private EditorialDTO convertBeanToDTO(Editorial editorial){
