@@ -1,11 +1,14 @@
 package com.pe.gacc.biblioteca.util.constant;
 
+import com.pe.gacc.biblioteca.domain.dto.HrefEntityDTO;
 import com.pe.gacc.biblioteca.domain.dto.PageableDTO;
+import com.pe.gacc.biblioteca.exception.validator.EntityGenericServerException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -47,24 +50,24 @@ public final class BibliotecaUtil {
         return pageable;
     }
 
-//    public HrefEntityDTO createHrefFromResource(Object id, BibliotecaResource resource)
-//            throws EntityGenericServerException {
-//        HrefEntityDTO hrefEntity = new HrefEntityDTO();
-//        try {
-//            StringBuilder builder = new StringBuilder();
-//            Field field = BibliotecaConstant.class.getDeclaredField("RESOURCE_" + resource + "S");
-//            Object valueResource = field.get("");
-//            builder.append(valueResource);
-//            field = BibliotecaConstant.class.getDeclaredField("RESOURCE_" + resource + "S_" + resource);
-//            valueResource = field.get("");
-//            builder.append(valueResource).append("/").append(id);
-//            hrefEntity.setId(id);
-//            hrefEntity.setHref(builder.toString());
-//        } catch (Exception e) {
-//            throw new EntityGenericServerException("Error generating href resource");
-//        }
-//        return hrefEntity;
-//    }
+    public HrefEntityDTO createHrefFromResource(Object id, BibliotecaResource resource)
+            throws EntityGenericServerException {
+        HrefEntityDTO hrefEntity = new HrefEntityDTO();
+        try {
+            StringBuilder builder = new StringBuilder();
+            Field field = BibliotecaConstant.class.getDeclaredField("RESOURCE_" + resource + "S");
+            Object valueResource = field.get("");
+            builder.append(valueResource);
+            field = BibliotecaConstant.class.getDeclaredField("RESOURCE_" + resource + "S_" + resource);
+            valueResource = field.get("");
+            builder.append(valueResource).append("/").append(id);
+            hrefEntity.setId(id);
+            hrefEntity.setHref(builder.toString());
+        } catch (Exception e) {
+            throw new EntityGenericServerException("Error generating href resource");
+        }
+        return hrefEntity;
+    }
 
     public static String convertirNumero_Letras(String numero, boolean mayusculas) {
 
