@@ -9,10 +9,11 @@ import com.pe.gacc.biblioteca.util.constant.BibliotecaUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Slf4j
 @RestController
@@ -40,7 +41,7 @@ public class EditorialController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody EditorialDTORequest editorialDTO){
+    public ResponseEntity<?> save(@RequestBody @Valid EditorialDTORequest editorialDTO){
 //        Long editorialDTORequest1 = editorialService.save(editorialDTORequest);
 
         return ResponseEntity
