@@ -22,13 +22,13 @@ public class AuthorController {
 
     @GetMapping
     public ResponseEntity<List<AuthorDTO>> findAll(@RequestParam String key_word){
-        return new ResponseEntity<List<AuthorDTO>>
+        return new ResponseEntity<>
                 (authorService.findByKeyWordSQL(key_word), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<AuthorDTO> saveSQL(@RequestBody @Valid AuthorDTORequest authorDTORequest){
-        return new ResponseEntity<AuthorDTO>
+        return new ResponseEntity<>
                 (authorService.saveSQL(authorDTORequest),HttpStatus.CREATED);
     }
 
