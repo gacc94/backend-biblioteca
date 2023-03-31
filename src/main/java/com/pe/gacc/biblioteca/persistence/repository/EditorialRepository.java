@@ -35,4 +35,20 @@ public class EditorialRepository {
     public Page<Editorial> findByNameLikeAndState(String name, String state, Pageable pageable){
         return editorialDao.findByNameLikeAndState(name,state,pageable);
     }
+
+    public Optional<Editorial> findByIdAndState(Long id, String state){
+        return editorialDao.findByIdAndState(id, state);
+    }
+
+    public Boolean existByIdSQL(Long id) {
+        return editorialDao.existByIdSQL(id);
+    }
+
+    public Editorial findByIdJPQL(Long id){
+        return editorialDao.findByIdJPQL(id);
+    }
+
+    public List<Editorial> findByNameContainingOrderByIdAsc(String name){
+        return editorialDao.findByNameContainingOrderByIdAsc(name);
+    }
 }

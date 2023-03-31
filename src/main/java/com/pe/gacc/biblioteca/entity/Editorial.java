@@ -4,6 +4,8 @@ import com.pe.gacc.biblioteca.util.constant.BibliotecaConstant;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = BibliotecaConstant.TAB_NAME_EDITORIAL, schema = BibliotecaConstant.SCHEMA_NAME_DBO)
@@ -22,4 +24,7 @@ public class Editorial{
     private String name;
     @Column(name = "state", length = 1)
     private String state;
+
+//    @OneToMany(mappedBy = "editorial")
+//    private List<Book> books = new ArrayList<Book>();
 }

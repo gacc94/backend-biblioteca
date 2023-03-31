@@ -16,19 +16,20 @@ public interface EditorialDao extends JpaRepository<Editorial,Long> {
     // =============================================================================================
     // PRIMERA FORMA .- POR NOMBRE DE METODO
     // =============================================================================================
-    public List<Editorial> findByNameContainingOrderByIdAsc(String name);
+    List<Editorial> findByNameContainingOrderByIdAsc(String name);
 
     // =============================================================================================
     // SEGUNDA FORMA .- MEDIANTE JPQL
     // =============================================================================================
     @Query("select e from Editorial e where id =?1")
-    public Editorial findByIdJPQL(Long id);
+    Editorial findByIdJPQL(Long id);
 
     // =============================================================================================
     // TERCERA FORMA .- MEDIANTE INSTRUCCION SQL
     // =============================================================================================
     @Query(value = "select count(*)>0 from dbo.t_editorial where ideditorial =?1", nativeQuery = true)
-    public Boolean existByIdSQL(Long id);
+    Boolean existByIdSQL(Long id);
 
-    public Optional<Editorial> findByIdAndState(Long id, String state);
+    Optional<Editorial> findByIdAndState(Long id, String state);
+
 }
