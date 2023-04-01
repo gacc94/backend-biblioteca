@@ -32,12 +32,12 @@ public class BookController {
         return new ResponseEntity<>(bookService.findById(id), HttpStatus.OK);
     }
 
-//    @GetMapping(BibliotecaConstant.RESOURCE_BOOKS_BOOK)
-//    public ResponseEntity<Page<AreaDTO>> findByDescription(@RequestParam String description, PageableDTO pageable){
-//        log.info("gacc EditorialController -> {}" + pageable.toString());
-//        return new ResponseEntity<Page<AreaDTO>>
-//                (bookService.findByDescription(description,bibliotecaUtil.getPageable(pageable)),HttpStatus.OK);
-//    }
+    @GetMapping(BibliotecaConstant.RESOURCE_BOOKS_BOOK)
+    public ResponseEntity<Page<BookDTO>> findByWordKey(@RequestParam String key_word, PageableDTO pageable){
+        log.info("gacc BookController -> {}" + pageable.toString());
+        return new ResponseEntity<Page<BookDTO>>
+                (bookService.findByKeyWordJPQL(key_word,bibliotecaUtil.getPageable(pageable)),HttpStatus.OK);
+    }
 
     @PostMapping(BibliotecaConstant.RESOURCE_BOOKS_BOOK)
     public ResponseEntity<HrefEntityDTO> save(@RequestBody @Valid BookDTORequest dto) {

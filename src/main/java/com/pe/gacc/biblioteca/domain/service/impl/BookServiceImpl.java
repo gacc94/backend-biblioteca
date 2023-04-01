@@ -16,6 +16,8 @@ import com.pe.gacc.biblioteca.util.constant.BibliotecaResource;
 import com.pe.gacc.biblioteca.util.constant.BibliotecaUtil;
 import com.pe.gacc.biblioteca.util.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -84,5 +86,11 @@ public class BookServiceImpl implements IBookService {
         Book book = bookRepository.findByIdAndState(id, BibliotecaConstant.STATE_ACTIVE)
                 .orElseThrow(()->new EntityNotFoundException("not found book"));
         return bookMapper.toDTO(book);
+    }
+
+    @Override
+    public Page<BookDTO> findByKeyWordJPQL(String key_word, Pageable pageable) {
+        Page<Book> books = bookRepository.findByKeyWordJPQL(key_word, BibliotecaConstant.STATE_ACTIVE, pageable);
+        return books.map((b)->bookMapper.toDTO(b));
     }
 }
